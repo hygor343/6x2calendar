@@ -48,8 +48,8 @@ body {
 }
 
 .day {
-    width: 100%;
-    padding-top: 100%;
+    width: 90%;
+    padding-top: 90%;
     position: relative;
     display: flex;
     justify-content: center;
@@ -80,7 +80,12 @@ body {
 .yellow { background-color: yellow; }
 .blue { background-color: blue; }
 .green { background-color: green; }
-.today { border: 2px solid black; box-sizing: border-box; }
+.today {
+    width: 100%;
+    padding-top: 100%;
+    border: 2px solid black;
+    box-sizing: border-box;
+}
 
 @media (max-width: 600px) {
     #calendar {
