@@ -12,9 +12,16 @@ body {
 
 #controls {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+    width: 100%;
+    max-width: 700px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 #controls button {
@@ -37,6 +44,8 @@ body {
     font-size: 24px;
     font-weight: bold;
     margin: 0 20px;
+    flex-grow: 1;
+    text-align: center;
 }
 
 #calendar {
