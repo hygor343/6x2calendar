@@ -57,6 +57,7 @@ body {
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 18px;
+    box-sizing: border-box;
 }
 
 .day span {
@@ -79,7 +80,7 @@ body {
 .yellow { background-color: yellow; }
 .blue { background-color: blue; }
 .green { background-color: green; }
-.today { border: 3px solid black; box-sizing: border-box; }
+.today { border: 2px solid black; box-sizing: border-box; }
 
 @media (max-width: 600px) {
     #calendar {
