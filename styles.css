@@ -10,6 +10,11 @@ body {
     box-sizing: border-box;
 }
 
+h1{
+    font-family: calibri;
+    color: #4f2170;
+}
+
 #controls {
     display: flex;
     justify-content: space-between; /* Garante que os botões fiquem nos extremos */
@@ -37,6 +42,7 @@ body {
 
 #monthYear {
     font-size: 24px;
+    color: #4f2170;
     font-weight: bold;
     text-align: center;
     flex: 1; /* Faz o monthYear ocupar o espaço restante */
@@ -49,6 +55,23 @@ body {
     gap: 10px;
     width: 100%;
     max-width: 700px;
+}
+#todayControl {
+    display: flex;
+    justify-content: center;
+    margin-top: none;
+    margin-bottom: 10px;
+}
+
+#todayControl button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .day {
@@ -87,7 +110,7 @@ body {
 .today {
     width: 100%;
     padding-top: 100%;
-    border: 2px solid black;
+    border: 3px solid black;
     box-sizing: border-box;
 }
 
