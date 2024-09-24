@@ -4,7 +4,7 @@ const prevButton = document.getElementById('prev');
 const nextButton = document.getElementById('next');
 const todayButton = document.getElementById('today');
 const colors = ['green', 'green', 'blue', 'blue', 'yellow', 'yellow', 'red', 'red'];
-let currentDate = new Date(2024, 7, 23); // 23 de agosto de 2024
+let currentDate = new Date(); // 23 de agosto de 2024
 let today = new Date();
 
 function generateCalendar() {
