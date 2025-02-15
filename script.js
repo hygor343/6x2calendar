@@ -1,11 +1,28 @@
+// ✅ Pegando os elementos do HTML
 const calendar = document.getElementById('calendar');
 const monthYear = document.getElementById('monthYear');
 const prevButton = document.getElementById('prev');
 const nextButton = document.getElementById('next');
 const todayButton = document.getElementById('today');
+const holidaysList = document.getElementById('holidays');
+
+// ✅ Cores do calendário 6x2
 const colors = ['green', 'green', 'blue', 'blue', 'yellow', 'yellow', 'red', 'red'];
-let currentDate = new Date(); // 23 de agosto de 2024
+
+let currentDate = new Date();
 let today = new Date();
+
+// ✅ Lista de feriados nacionais (DD-MM)
+const feriados = {
+    "01-01": "Confraternização Universal",
+    "21-04": "Tiradentes",
+    "01-05": "Dia do Trabalho",
+    "07-09": "Independência do Brasil",
+    "12-10": "Nossa Senhora Aparecida",
+    "02-11": "Finados",
+    "15-11": "Proclamação da República",
+    "25-12": "Natal"
+};
 
 function generateCalendar() {
     calendar.innerHTML = '';
@@ -16,7 +33,6 @@ function generateCalendar() {
 
     monthYear.textContent = `${startDate.toLocaleString('default', { month: 'long' })} ${startDate.getFullYear()}`;
 
-    // Adicionar cabeçalho dos dias da semana
     const daysOfWeek = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
     daysOfWeek.forEach(day => {
         const dayHeader = document.createElement('div');
@@ -25,12 +41,10 @@ function generateCalendar() {
         calendar.appendChild(dayHeader);
     });
 
-    // Calcular o índice de cor inicial
     let initialColorIndex = (Math.floor((startDate - new Date(2024, 7, 23)) / (1000 * 60 * 60 * 24)) % colors.length + colors.length) % colors.length;
 
     for (let i = 0; i < dayOfWeek; i++) {
-        const emptyDiv = document.createElement('div');
-        calendar.appendChild(emptyDiv);
+        calendar.appendChild(document.createElement('div'));
     }
 
     for (let i = 1; i <= daysInMonth; i++) {
@@ -46,21 +60,34 @@ function generateCalendar() {
 
         calendar.appendChild(dayDiv);
     }
+
+    updateHolidays(initialColorIndex);
 }
 
-prevButton.addEventListener('click', () => {
-    currentDate.setMonth(currentDate.getMonth() - 1);
-    generateCalendar();
-});
+function updateHolidays(initialColorIndex) {
+    holidaysList.innerHTML = "";
+    let month = (currentDate.getMonth() + 1).toString().padStart(2, "0");
+    let foundHoliday = false;
 
-nextButton.addEventListener('click', () => {
-    currentDate.setMonth(currentDate.getMonth() + 1);
-    generateCalendar();
-});
+    for (let day in feriados) {
+        if (day.endsWith(month)) {
+            let dayNumber = parseInt(day.split("-")[0]);
+            let colorIndex = (initialColorIndex + dayNumber - 1) % colors.length;
+            let li = document.createElement("li");
+            li.textContent = `${dayNumber}/${month}: ${feriados[day]}`;
+            li.classList.add(colors[colorIndex]);
+            holidaysList.appendChild(li);
+            foundHoliday = true;
+        }
+    }
 
-todayButton.addEventListener('click', () => {
-    currentDate = new Date(today);
-    generateCalendar();
-});
+    if (!foundHoliday) {
+        holidaysList.innerHTML = "<li style='font-style:italic'>Sem Feriados Nacionais esse Mês</li>";
+    }
+}
+
+prevButton.addEventListener('click', () => { currentDate.setMonth(currentDate.getMonth() - 1); generateCalendar(); });
+nextButton.addEventListener('click', () => { currentDate.setMonth(currentDate.getMonth() + 1); generateCalendar(); });
+todayButton.addEventListener('click', () => { currentDate = new Date(today); generateCalendar(); });
 
 generateCalendar();
